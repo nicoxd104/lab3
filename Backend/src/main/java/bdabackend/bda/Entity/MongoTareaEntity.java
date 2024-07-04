@@ -17,11 +17,19 @@ import java.util.Set;
 public class MongoTareaEntity {
     @Id
     private String id;
-    private String nombre;
-    private String descripcion;
-    private String tipo;
-    private Point zona;
 
+    @Field("nombre")
+    private String nombre;
+
+    @Field("descripcion")
+    private String descripcion;
+
+    @Field("tipo")
+    private String tipo;
+
+    @Field("zona")
+    private Point zona;
+    /*
     @DBRef
     private Set<RankingEntity> ranking = new HashSet<>();
 
@@ -30,9 +38,14 @@ public class MongoTareaEntity {
 
     @DBRef
     private Set<EstadoTareaEntity> estadoTarea = new HashSet<>();
+    */
 
-    @DBRef
-    private EmergenciaEntity emergencia;
+    private Set<Long> estadoTareaIds = new HashSet<>();
+
+    @Field("emergencia")
+    private String emergencia;
+
+
 
     // Constructor
     public MongoTareaEntity() {
@@ -65,6 +78,42 @@ public class MongoTareaEntity {
 
     public String getDescripcion() {
         return descripcion;
+    }
+       /*
+
+    public Set<RankingEntity> getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(Set<RankingEntity> ranking) {
+        this.ranking = ranking;
+    }
+
+
+    public Set<TareaHabilidadEntity> getTareaHabilidad() {
+        return tareaHabilidad;
+    }
+
+    public void setTareaHabilidad(Set<TareaHabilidadEntity> tareaHabilidad) {
+        this.tareaHabilidad = tareaHabilidad;
+    }
+
+    public Set<EstadoTareaEntity> getEstadoTarea() {
+        return estadoTarea;
+    }
+
+    public void setEstadoTarea(Set<EstadoTareaEntity> estadoTarea) {
+        this.estadoTarea = estadoTarea;
+    }
+
+     */
+
+    public String getEmergencia() {
+        return emergencia;
+    }
+
+    public void setEmergencia(String emergencia) {
+        this.emergencia = emergencia;
     }
 
     public void setDescripcion(String descripcion) {

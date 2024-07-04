@@ -11,20 +11,18 @@ public class EstadoTareaEntity {
 
     @Column(name = "estado")
     private Boolean estado;
-/*
-    @ManyToOne
-    @JoinColumn(name = "id_tarea")
-    private MongoTareaEntity tarea;
-*/
+    @Column(name = "tarea_id")
+    private Long tareaId;
+
     // Constructores
     public EstadoTareaEntity() {
     }
 
     public EstadoTareaEntity(Boolean estado
-            //, MongoTareaEntity tarea
+            , Long tarea
     ) {
         this.estado = estado;
-        //this.tarea = tarea;
+        this.tareaId = tarea;
     }
 
     // Getters y Setters
