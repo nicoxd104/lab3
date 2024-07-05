@@ -18,7 +18,7 @@ public class RankingService {
     private VoluntarioService voluntarioService;
 
     public void insertarRanking(int nivel, String tareaRanking, String nombreVoluntario,
-            String numeroDocumentoVoluntario, Long idTarea, Long idVoluntario) {
+            String numeroDocumentoVoluntario, String idTarea, Long idVoluntario) {
         rankingRepository.insertarRanking(nivel, tareaRanking, nombreVoluntario, numeroDocumentoVoluntario, idTarea,
                 idVoluntario);
     }

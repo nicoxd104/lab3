@@ -23,7 +23,7 @@ public interface RankingRepository extends JpaRepository<RankingEntity, Long> {
         public void insertarRanking(@Param("nivel") int nivel, @Param("tareaRanking") String tareaRanking,
                         @Param("nombre_voluntario") String nombre_voluntario,
                         @Param("numeroDocumentoVoluntario") String numeroDocumentoVoluntario,
-                        @Param("idTarea") Long idTarea,
+                        @Param("idTarea") String idTarea,
                         @Param("idVoluntario") Long idVoluntario);
 
         // Crear

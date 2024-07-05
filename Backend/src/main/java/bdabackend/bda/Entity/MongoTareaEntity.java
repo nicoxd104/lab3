@@ -40,10 +40,10 @@ public class MongoTareaEntity {
     private Set<EstadoTareaEntity> estadoTarea = new HashSet<>();
     */
 
-    private Set<Long> estadoTareaIds = new HashSet<>();
+
 
     @Field("emergencia")
-    private String emergencia;
+    private Long emergencia;
 
 
 
@@ -51,11 +51,12 @@ public class MongoTareaEntity {
     public MongoTareaEntity() {
     }
 
-    public MongoTareaEntity(String nombre, String descripcion, String tipo, Point zona) {
+    public MongoTareaEntity(String nombre, String descripcion, String tipo, Point zona, Long emergencia) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.zona = zona;
+        this.emergencia = emergencia;
     }
 
     // Getters y Setters
@@ -108,11 +109,11 @@ public class MongoTareaEntity {
 
      */
 
-    public String getEmergencia() {
+    public Long getEmergencia() {
         return emergencia;
     }
 
-    public void setEmergencia(String emergencia) {
+    public void setEmergencia(Long emergencia) {
         this.emergencia = emergencia;
     }
 

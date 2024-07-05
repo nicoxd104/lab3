@@ -1,5 +1,6 @@
 package bdabackend.bda.Controller;
 
+import bdabackend.bda.Entity.MongoTareaEntity;
 import bdabackend.bda.Entity.RankingEntity;
 import bdabackend.bda.Service.AuditoriaService;
 import bdabackend.bda.Service.MongoTareaService;
@@ -8,8 +9,11 @@ import bdabackend.bda.Service.VoluntarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/ranking")
@@ -43,7 +47,7 @@ public class RankingController {
         return rankingService.listaRanking();
     }
 
-    /*
+
     @PostMapping("/add")
     public void crearRanking(@RequestBody Map<String, String> body){
         Long idVoluntario = Long.parseLong(body.get("idVoluntario"));
@@ -63,11 +67,29 @@ public class RankingController {
         double latitudVoluntario = latLong1[1];
         double longitudVoluntario = latLong1[0];
         double distancia = rankingService.distanciaEntrePuntos(latitudVoluntario, longitudVoluntario, latitudEmergencia, longitudEmergencia);
+
+        List<List<MongoTareaEntity>> f = new ArrayList<>();
+        List<MongoTareaEntity> hola = tareaService.listaTarea();
+        for(MongoTareaEntity holas: hola){
+            Long g = holas.getEmergencia();
+            if (Objects.equals(g, idEmergencia)){
+                f.add(hola);
+            }
+        }
         List<?> tareas = tareaService.tareaEmerg(idEmergencia);
+        System.out.println(f);
+
+
         for (Object tarea : tareas) {
             Object[] tarea1 = (Object[]) tarea;
-            Long idTarea = (Long) tarea1[0];
+
+            System.out.println("hola2");
+
+            String idTarea = (String) tarea1[0];
             String tareaRanking = tareaService.nombre(idTarea);
+
+
+
             int nivelRanking = rankingService.puntajeRanking(distancia, idVoluntario);
             String nombreVoluntario = voluntarioService.nombrev(idVoluntario);
             String numeroDocumentoVoluntario = voluntarioService.numerov(idVoluntario);
@@ -82,7 +104,7 @@ public class RankingController {
             // auditoriaService.registrarCambio(idUsuario, "Add", "añadio un ranking");
         }
     }
-     */
+
 
     @DeleteMapping("/delete/{idRanking}")
     public void eliminar(@PathVariable Long idRanking) {

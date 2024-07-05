@@ -11,15 +11,15 @@ public class EstadoTareaEntity {
 
     @Column(name = "estado")
     private Boolean estado;
-    @Column(name = "tarea_id")
-    private Long tareaId;
+    @Column(name = "id_tarea")
+    private String tareaId;
 
     // Constructores
     public EstadoTareaEntity() {
     }
 
     public EstadoTareaEntity(Boolean estado
-            , Long tarea
+            , String tarea
     ) {
         this.estado = estado;
         this.tareaId = tarea;
@@ -33,11 +33,11 @@ public class EstadoTareaEntity {
     public Boolean getEstado() {
         return estado;
     }
-/*
-    public MongoTareaEntity getTarea() {
-        return tarea;
+
+    public String getTarea() {
+        return tareaId;
     }
-*/
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -45,10 +45,10 @@ public class EstadoTareaEntity {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
-/*
-    public void setTarea(MongoTareaEntity tarea) {
-        this.tarea = tarea;
+
+    public void setTarea(String tarea) {
+        this.tareaId = tarea;
     }
 
- */
+
 }

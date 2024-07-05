@@ -16,9 +16,9 @@ public interface EstadoTareaRepository extends JpaRepository<EstadoTareaEntity, 
     // Crear
     @Transactional
     @Modifying
-    @Query(value = "INSERT INTO estado_tarea (idTarea, estadoTarea) " +
-            "VALUES (:idTarea, :estadoTarea)", nativeQuery = true)
-    public void insertarEstadoTarea(@Param("idTarea") Long idTarea, @Param("estadoTarea") boolean estadoTarea);
+    @Query(value = "INSERT INTO estado_tarea (id_tarea, estado) " +
+            "VALUES (:id_tarea, :estado)", nativeQuery = true)
+    public void insertarEstadoTarea(@Param("id_tarea") String idTarea, @Param("estado") boolean estadoTarea);
 
     // Leer
     @Query("SELECT v FROM EstadoTareaEntity v WHERE v.id = ?1")

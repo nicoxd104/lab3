@@ -20,8 +20,8 @@ public class MongoTareaService {
     private MongoTareaRepository mongoTareaRepository;
 
     // Guardar una nueva tarea o actualizar una existente
-    public MongoTareaEntity insertarTarea(String nombreTarea, String descripcionTarea, String tipoTarea, Point zona, String emergencia) {
-        MongoTareaEntity tarea = new MongoTareaEntity(nombreTarea, descripcionTarea, tipoTarea, zona);
+    public MongoTareaEntity insertarTarea(String nombreTarea, String descripcionTarea, String tipoTarea, Point zona, Long emergencia) {
+        MongoTareaEntity tarea = new MongoTareaEntity(nombreTarea, descripcionTarea, tipoTarea, zona, emergencia);
         logger.info("Guardando tarea: {}", tarea);
         return mongoTareaRepository.save(tarea);
     }
@@ -40,5 +40,14 @@ public class MongoTareaService {
     public void eliminarTareaPorId(String id) {
         logger.info("Eliminando tarea con id: {}", id);
         mongoTareaRepository.deleteById(id);
+    }
+
+    public String nombre(String id) {
+        MongoTareaEntity tarea = mongoTareaRepository.findNombreById(id);
+        return tarea != null ? tarea.getNombre() : null;
+    }
+
+    public List<MongoTareaEntity> tareaEmerg(Long emergenciaId) {
+        return mongoTareaRepository.findByEmergenciaId(emergenciaId);
     }
 }
