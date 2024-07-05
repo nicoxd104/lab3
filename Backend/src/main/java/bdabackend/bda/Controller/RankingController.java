@@ -1,5 +1,6 @@
 package bdabackend.bda.Controller;
 
+import bdabackend.bda.DTO.TareaDot;
 import bdabackend.bda.Entity.MongoTareaEntity;
 import bdabackend.bda.Entity.RankingEntity;
 import bdabackend.bda.Service.AuditoriaService;
@@ -68,24 +69,42 @@ public class RankingController {
         double longitudVoluntario = latLong1[0];
         double distancia = rankingService.distanciaEntrePuntos(latitudVoluntario, longitudVoluntario, latitudEmergencia, longitudEmergencia);
 
-        List<List<MongoTareaEntity>> f = new ArrayList<>();
-        List<MongoTareaEntity> hola = tareaService.listaTarea();
-        for(MongoTareaEntity holas: hola){
-            Long g = holas.getEmergencia();
-            if (Objects.equals(g, idEmergencia)){
-                f.add(hola);
+
+        List<MongoTareaEntity> tareas = tareaService.listaTarea();// obtener las tareas desde tu base de datos o servicio
+                List<TareaDot> tareasFormateadas = new ArrayList<>();
+
+
+        for (MongoTareaEntity tarea : tareas) {
+            // Formatear los atributos de la tarea
+            String id = tarea.getId();
+            String nombre = tarea.getNombre();
+            String descripcion = tarea.getDescripcion();
+            String tipo = tarea.getTipo();
+            String zona = String.format("Lat: %s, Lon: %s", tarea.getZona().getX(), tarea.getZona().getY());
+            String emergencia3 = String.valueOf(tarea.getEmergencia());
+            String emergenciaStr = String.valueOf(idEmergencia);
+            System.out.println(emergencia3);
+            System.out.println(emergenciaStr);
+            if(Objects.equals(emergencia3, emergenciaStr)){
+
+                // Crear el DTO de la tarea formateada
+                TareaDot tareaFormateada = new TareaDot(id, nombre, descripcion, tipo, zona, emergencia3);
+
+                // Añadir a la lista de tareas formateadas
+                tareasFormateadas.add(tareaFormateada);
             }
         }
-        List<?> tareas = tareaService.tareaEmerg(idEmergencia);
-        System.out.println(f);
+
+// Ahora tienes una lista de cadenas formateadas que puedes imprimir o manipular
+        System.out.println(tareasFormateadas);
 
 
-        for (Object tarea : tareas) {
-            Object[] tarea1 = (Object[]) tarea;
+        for (TareaDot tarea : tareasFormateadas) {
+
 
             System.out.println("hola2");
 
-            String idTarea = (String) tarea1[0];
+            String idTarea = tarea.getId();
             String tareaRanking = tareaService.nombre(idTarea);
 
 
